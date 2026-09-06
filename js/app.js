@@ -140,13 +140,14 @@ document.addEventListener(
 
 
 /* =========================================================
-   FPS LAB - BEST-EFFORT SOURCE/DEVTOOLS SHORTCUT BLOCK
-   Bu koruma kullanıcı form alanlarını ve normal site kullanımını bozmaz.
+   FPS LAB - BEST-EFFORT SOURCE / DEVTOOLS PROTECTION
+   Bu katman hesaplama motoruna dokunmaz ve form kontrollerini bozmaz.
+   Tarayıcı tarafında %100 kaynak gizleme mümkün değildir.
    ========================================================= */
 (function installSecurityGuards() {
     "use strict";
 
-    // Sağ tık menüsünü kapat.
+    // Sağ tık menüsü: kaynak/inceleme menülerine erişimi zorlaştırır.
     document.addEventListener("contextmenu", function (event) {
         event.preventDefault();
     }, true);
@@ -156,25 +157,38 @@ document.addEventListener(
         const code = String(event.code || "").toLowerCase();
         const ctrl = event.ctrlKey || event.metaKey;
         const shift = event.shiftKey;
+        const alt = event.altKey;
 
-        // F12 - DevTools
+        // F12 / function-key DevTools variants.
         const devToolsFunctionKey = key === "f12" || code === "f12";
 
-        // Ctrl/Cmd + Shift + I/J/C/K - DevTools variants
+        // Ctrl/Cmd + Shift + I/J/C/K/S/U: DevTools/source-related browser shortcuts.
         const devToolsShortcut =
-            ctrl && shift && ["i", "j", "c", "k"].includes(key);
+            ctrl && shift && ["i", "j", "c", "k", "s", "u"].includes(key);
 
-        // Ctrl/Cmd + U - View Source
+        // Ctrl/Cmd + U: View Source.
         const viewSourceShortcut = ctrl && key === "u";
 
-        // Ctrl/Cmd + S - Save page/source shortcut
+        // Ctrl/Cmd + S: Save page.
         const savePageShortcut = ctrl && key === "s";
+
+        // Ctrl/Cmd + P: printing can expose/save the rendered page.
+        const printShortcut = ctrl && key === "p";
+
+        // Ctrl/Cmd + Shift + P: command/print-related browser shortcut.
+        const commandShortcut = ctrl && shift && key === "p";
+
+        // Alt + Shift + I is a DevTools shortcut in some Chromium environments.
+        const alternateDevToolsShortcut = alt && shift && key === "i";
 
         if (
             devToolsFunctionKey ||
             devToolsShortcut ||
             viewSourceShortcut ||
-            savePageShortcut
+            savePageShortcut ||
+            printShortcut ||
+            commandShortcut ||
+            alternateDevToolsShortcut
         ) {
             event.preventDefault();
             event.stopPropagation();
@@ -182,4 +196,18 @@ document.addEventListener(
             return false;
         }
     }, true);
+
+    // Block common source-saving/printing routes without touching normal inputs.
+    window.addEventListener("beforeprint", function (event) {
+        event.preventDefault();
+    });
+
+    // Prevent dragging page assets out to another application.
+    document.addEventListener("dragstart", function (event) {
+        const target = event.target;
+        if (target && target.tagName === "IMG") {
+            event.preventDefault();
+        }
+    }, true);
+
 })();
