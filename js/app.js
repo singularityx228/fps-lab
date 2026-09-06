@@ -147,10 +147,16 @@ document.addEventListener(
 (function installSecurityGuards() {
     "use strict";
 
-    // Sağ tık menüsü: kaynak/inceleme menülerine erişimi zorlaştırır.
-    document.addEventListener("contextmenu", function (event) {
+    function block(event) {
         event.preventDefault();
-    }, true);
+        event.stopPropagation();
+        if (typeof event.stopImmediatePropagation === "function") {
+            event.stopImmediatePropagation();
+        }
+        return false;
+    }
+
+    document.addEventListener("contextmenu", block, true);
 
     document.addEventListener("keydown", function (event) {
         const key = String(event.key || "").toLowerCase();
@@ -159,55 +165,39 @@ document.addEventListener(
         const shift = event.shiftKey;
         const alt = event.altKey;
 
-        // F12 / function-key DevTools variants.
-        const devToolsFunctionKey = key === "f12" || code === "f12";
+        if (key === "f12" || code === "f12") return block(event);
 
-        // Ctrl/Cmd + Shift + I/J/C/K/S/U: DevTools/source-related browser shortcuts.
-        const devToolsShortcut =
-            ctrl && shift && ["i", "j", "c", "k", "s", "u"].includes(key);
-
-        // Ctrl/Cmd + U: View Source.
-        const viewSourceShortcut = ctrl && key === "u";
-
-        // Ctrl/Cmd + S: Save page.
-        const savePageShortcut = ctrl && key === "s";
-
-        // Ctrl/Cmd + P: printing can expose/save the rendered page.
-        const printShortcut = ctrl && key === "p";
-
-        // Ctrl/Cmd + Shift + P: command/print-related browser shortcut.
-        const commandShortcut = ctrl && shift && key === "p";
-
-        // Alt + Shift + I is a DevTools shortcut in some Chromium environments.
-        const alternateDevToolsShortcut = alt && shift && key === "i";
-
-        if (
-            devToolsFunctionKey ||
-            devToolsShortcut ||
-            viewSourceShortcut ||
-            savePageShortcut ||
-            printShortcut ||
-            commandShortcut ||
-            alternateDevToolsShortcut
-        ) {
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-            return false;
+        if (ctrl && shift && ["i", "j", "c", "k", "s", "u"].includes(key)) {
+            return block(event);
         }
+
+        if (ctrl && ["u", "s", "p"].includes(key)) {
+            return block(event);
+        }
+
+        if (ctrl && shift && key === "p") return block(event);
+        if (alt && shift && key === "i") return block(event);
     }, true);
 
-    // Block common source-saving/printing routes without touching normal inputs.
-    window.addEventListener("beforeprint", function (event) {
-        event.preventDefault();
-    });
-
-    // Prevent dragging page assets out to another application.
     document.addEventListener("dragstart", function (event) {
+        if (event.target && event.target.tagName === "IMG") block(event);
+    }, true);
+
+    document.addEventListener("copy", function (event) {
         const target = event.target;
-        if (target && target.tagName === "IMG") {
-            event.preventDefault();
+        const tag = target && target.tagName ? target.tagName : "";
+        if (tag !== "INPUT" && tag !== "TEXTAREA" && !(target && target.isContentEditable)) {
+            block(event);
         }
     }, true);
 
+    // Load the isolated guard file without changing calculator/auth code paths.
+    // A failure here must never stop FPS Lab from working.
+    try {
+        const securityScript = document.createElement("script");
+        securityScript.src = "js/security-guard.js";
+        securityScript.async = false;
+        securityScript.onerror = function () {};
+        document.head.appendChild(securityScript);
+    } catch (_) {}
 })();
