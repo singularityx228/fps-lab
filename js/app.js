@@ -137,3 +137,49 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   FPS LAB - BEST-EFFORT SOURCE/DEVTOOLS SHORTCUT BLOCK
+   Bu koruma kullanıcı form alanlarını ve normal site kullanımını bozmaz.
+   ========================================================= */
+(function installSecurityGuards() {
+    "use strict";
+
+    // Sağ tık menüsünü kapat.
+    document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+    }, true);
+
+    document.addEventListener("keydown", function (event) {
+        const key = String(event.key || "").toLowerCase();
+        const code = String(event.code || "").toLowerCase();
+        const ctrl = event.ctrlKey || event.metaKey;
+        const shift = event.shiftKey;
+
+        // F12 - DevTools
+        const devToolsFunctionKey = key === "f12" || code === "f12";
+
+        // Ctrl/Cmd + Shift + I/J/C/K - DevTools variants
+        const devToolsShortcut =
+            ctrl && shift && ["i", "j", "c", "k"].includes(key);
+
+        // Ctrl/Cmd + U - View Source
+        const viewSourceShortcut = ctrl && key === "u";
+
+        // Ctrl/Cmd + S - Save page/source shortcut
+        const savePageShortcut = ctrl && key === "s";
+
+        if (
+            devToolsFunctionKey ||
+            devToolsShortcut ||
+            viewSourceShortcut ||
+            savePageShortcut
+        ) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return false;
+        }
+    }, true);
+})();
