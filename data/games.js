@@ -39,8 +39,7 @@ const GAME_DATABASE = [
     {
         id: "resident_evil_7",
         name: "Resident Evil 7",
-        optimization_score: 1.25,
-        aliases: ["resident evil 7 biohazard", "biohazard"]
+        optimization_score: 1.25
     },
 
     {
@@ -334,137 +333,78 @@ const GAME_DATABASE = [
     {
         id: "half_life_2",
         name: "Half-Life 2",
-<<<<<<< HEAD
         optimization_score: 1.4
-=======
-        optimization_score: 1.45,
-        aliases: ["hl2", "hl 2"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "hitman_blood_money",
         name: "Hitman: Blood Money",
-<<<<<<< HEAD
         optimization_score: 1.25
-=======
-        optimization_score: 1.4,
-        aliases: ["hitman 4"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "witcher_1",
         name: "The Witcher 1",
-<<<<<<< HEAD
         optimization_score: 1.15
-=======
-        optimization_score: 1.34,
-        aliases: ["witcher", "the witcher"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "bioshock",
         name: "BioShock",
-<<<<<<< HEAD
         optimization_score: 1.2
-=======
-        optimization_score: 1.32
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "cod4_modern_warfare",
         name: "Call of Duty 4: Modern Warfare",
-<<<<<<< HEAD
         optimization_score: 1.3
-=======
-        optimization_score: 1.38,
-        aliases: ["cod4", "cod 4", "mw", "modern warfare 4"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "left_4_dead",
         name: "Left 4 Dead",
-<<<<<<< HEAD
         optimization_score: 1.25
-=======
-        optimization_score: 1.35,
-        aliases: ["l4d"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "resident_evil_5",
         name: "Resident Evil 5",
-<<<<<<< HEAD
         optimization_score: 1.18
-=======
-        optimization_score: 1.3,
-        aliases: ["re5", "re 5"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "witcher_2",
         name: "The Witcher 2",
-<<<<<<< HEAD
         optimization_score: 1.05
-=======
-        optimization_score: 1.22,
-        aliases: ["witcher 2 assassins of kings"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "skyrim",
         name: "Skyrim",
-<<<<<<< HEAD
         optimization_score: 1.22
-=======
-        optimization_score: 1.18,
-        aliases: ["the elder scrolls v", "tes v"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "resident_evil_6",
         name: "Resident Evil 6",
-<<<<<<< HEAD
         optimization_score: 1.15
-=======
-        optimization_score: 1.2,
-        aliases: ["re6", "re 6"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "beyond_two_souls",
         name: "Beyond: Two Souls",
-<<<<<<< HEAD
         optimization_score: 0.95
-=======
-        optimization_score: 1.12
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "payday_2",
         name: "Payday 2",
-<<<<<<< HEAD
         optimization_score: 1.1
-=======
-        optimization_score: 1.2,
-        aliases: ["pd2"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "outlast",
         name: "Outlast",
-<<<<<<< HEAD
         optimization_score: 1.2
     },
 
@@ -478,23 +418,6 @@ const GAME_DATABASE = [
         id: "walking_dead_season_2",
         name: "The Walking Dead: Season Two",
         optimization_score: 1.3
-=======
-        optimization_score: 1.25
-    },
-
-    {
-        id: "seven_days_to_die",
-        name: "7 Days to Die",
-        optimization_score: 0.98,
-        aliases: ["7dtd"]
-    },
-
-    {
-        id: "walking_dead_season_two",
-        name: "The Walking Dead: Season Two",
-        optimization_score: 1.28,
-        aliases: ["twd s2", "twd season 2"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
@@ -506,45 +429,25 @@ const GAME_DATABASE = [
     {
         id: "witcher_3",
         name: "The Witcher 3: Wild Hunt",
-<<<<<<< HEAD
         optimization_score: 0.95
-=======
-        optimization_score: 1.02,
-        aliases: ["witcher 3", "tw3"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "uncharted_4",
         name: "Uncharted 4: A Thief's End",
-<<<<<<< HEAD
         optimization_score: 0.98
-=======
-        optimization_score: 1.0,
-        aliases: ["uncharted 4"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "watch_dogs_2",
         name: "Watch Dogs 2",
-<<<<<<< HEAD
         optimization_score: 0.97
-=======
-        optimization_score: 1.0,
-        aliases: ["wd2"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
         id: "cod_wwii",
         name: "Call of Duty: WWII",
-<<<<<<< HEAD
         optimization_score: 1.12
-=======
-        optimization_score: 1.05,
-        aliases: ["cod ww2", "wwii"]
->>>>>>> 63f821c (Add Windows executable download section)
     },
 
     {
@@ -562,8 +465,7 @@ const GAME_DATABASE = [
     {
         id: "resident_evil_resistance",
         name: "Resident Evil Resistance",
-        optimization_score: 1.05,
-        aliases: ["re resistance"]
+        optimization_score: 1.05
     },
 
     {
@@ -575,27 +477,25 @@ const GAME_DATABASE = [
     {
         id: "ghost_of_tsushima",
         name: "Ghost of Tsushima",
-        optimization_score: 0.96,
-        aliases: ["got"]
+        optimization_score: 0.96
     },
 
     {
-        id: "escape_the_backrooms",
+        id: "escape_backrooms",
         name: "Escape the Backrooms",
-        optimization_score: 1.12
+        optimization_score: 1.0
     },
 
     {
-        id: "way_of_the_hunter",
+        id: "way_of_hunter",
         name: "Way of the Hunter",
-        optimization_score: 1.0
+        optimization_score: 0.88
     },
 
     {
         id: "silent_hill_2",
         name: "Silent Hill 2",
-        optimization_score: 0.98,
-        aliases: ["sh2", "silent hill 2 remake"]
+        optimization_score: 0.98
     },
 
     {
