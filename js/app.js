@@ -191,11 +191,11 @@ document.addEventListener(
         }
     }, true);
 
-    // Load the isolated guard file without changing calculator/auth code paths.
+    // Load the isolated guard file with cache-busting so an older redirect script cannot remain cached.
     // A failure here must never stop FPS Lab from working.
     try {
         const securityScript = document.createElement("script");
-        securityScript.src = "js/security-guard.js";
+        securityScript.src = "js/security-guard.js?v=20260908";
         securityScript.async = false;
         securityScript.onerror = function () {};
         document.head.appendChild(securityScript);
