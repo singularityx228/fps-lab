@@ -8,15 +8,11 @@
 
     /* =========================================================
        FPS LAB - DOMAIN LOCK
-       The calculator is allowed only on the official FPS Lab URL.
-       If the project is copied to another website/domain, the visitor
-       is sent back to the original FPS Lab site.
-
-       Local development is allowed so testing is not broken.
-       This does not touch calculator/auth logic.
+       Allow the current official GitHub Pages domain and local testing.
+       Do not redirect visitors to the old/incorrect GitHub account.
        ========================================================= */
     (function enforceDomainLock() {
-        var OFFICIAL_ORIGIN = "https://sdfsgedsfhstjhfghfda.github.io";
+        var OFFICIAL_HOST = "singularityx228.github.io";
         var OFFICIAL_PATH = "/fps-lab";
         var host = String(window.location.hostname || "").toLowerCase();
         var protocol = String(window.location.protocol || "").toLowerCase();
@@ -28,14 +24,14 @@
 
         var isOfficial =
             protocol === "https:" &&
-            window.location.origin.toLowerCase() === OFFICIAL_ORIGIN &&
+            host === OFFICIAL_HOST &&
             (pathname === OFFICIAL_PATH || pathname.indexOf(OFFICIAL_PATH + "/") === 0);
 
         if (!isOfficial && !isLocal) {
             try {
-                window.location.replace(OFFICIAL_ORIGIN + OFFICIAL_PATH + "/");
+                window.location.replace("https://" + OFFICIAL_HOST + OFFICIAL_PATH + "/");
             } catch (_) {
-                window.location.href = OFFICIAL_ORIGIN + OFFICIAL_PATH + "/";
+                window.location.href = "https://" + OFFICIAL_HOST + OFFICIAL_PATH + "/";
             }
             return;
         }
